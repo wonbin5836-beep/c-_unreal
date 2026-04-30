@@ -8,7 +8,7 @@ double TotalDistance = 0;
 int32 EventCount = 0;
 AMyActor::AMyActor()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
@@ -16,7 +16,7 @@ AMyActor::AMyActor()
 // Called when the game starts or when spawned
 void AMyActor::BeginPlay()
 {
-	
+
 	Super::BeginPlay();
 	TotalDistance = 0;
 	EventCount = 0;
@@ -27,11 +27,11 @@ void AMyActor::BeginPlay()
 		Turn();
 		if (GEngine)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 50.0f, FColor::Red, FString::Printf(TEXT("Iteration: %d"), i+1));
+			GEngine->AddOnScreenDebugMessage(-1, 50.0f, FColor::Red, FString::Printf(TEXT("Iteration: %d"), i + 1));
 		}
-		if(FMath::RandRange(0, 1) == 0)
+		if (FMath::RandRange(0, 1) == 0)
 		{
-			
+
 			EventCount++;
 			TriggerEvent();
 		}
@@ -39,7 +39,7 @@ void AMyActor::BeginPlay()
 
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 60.0f, FColor::Yellow, FString::Printf(TEXT("Total Distance : %f, Total Event Count : %d"),TotalDistance, EventCount));
+		GEngine->AddOnScreenDebugMessage(-1, 60.0f, FColor::Yellow, FString::Printf(TEXT("Total Distance : %f, Total Event Count : %d"), TotalDistance, EventCount));
 	}
 }
 
@@ -48,7 +48,7 @@ void AMyActor::BeginPlay()
 void AMyActor::Move()
 {
 	FVector Target;
-	
+
 
 	Target.X = FMath::FRandRange(-500.0, 500.0);
 	Target.Y = FMath::FRandRange(-500.0, 500.0);
@@ -60,7 +60,7 @@ void AMyActor::Move()
 	TotalDistance += FVector::Dist(CurrentLocation, Target);
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 50.0f, FColor::Red, CurrentLocation.ToString());
+		GEngine->AddOnScreenDebugMessage(-1, 50.0f, FColor::Red, FString::Printf(TEXT("Current Location = %s\n Distance = %f"), *CurrentLocation.ToString(), FVector::Dist(CurrentLocation, Target)));
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Location = %s"), *CurrentLocation.ToString());
 }
@@ -85,7 +85,7 @@ void AMyActor::TriggerEvent()
 {
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 50.0f, FColor::Red,FString::Printf(TEXT("Event Triggered!")));
+		GEngine->AddOnScreenDebugMessage(-1, 50.0f, FColor::Red, FString::Printf(TEXT("Event Triggered!")));
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Event Triggered!"));
 }
